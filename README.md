@@ -1,4 +1,4 @@
-# My Bookstore API
+# My Backend Express Bookstore API
 
 This is a backend API for a bookstore application built with Express.js, TypeScript, and PostgreSQL.
 
