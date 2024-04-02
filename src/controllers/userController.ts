@@ -24,9 +24,9 @@ export const updateUser = async (req: Request, res: Response) => {
 };
 
 export const addNewUser = async (req: Request, res: Response) => {
-    const { name } = req.body;
+    const { name, email, address, password } = req.body;
     try {
-        const result = await createNewUser(name);
+        const result = await createNewUser(name, email, address, password);
         res.json(result);
     } catch (error) {
         console.error(error);

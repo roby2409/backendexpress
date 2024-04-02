@@ -20,8 +20,18 @@ export const getUserPoints = async (id: number): Promise<Number | undefined> => 
     return user?.point;
 }
 
-export const createNewUser = async (name: string) => {
-    return userRepository.addUser(name)
+export const createNewUser = async (
+    name: string,
+    email: string,
+    address: string,
+    password: string,
+) => {
+    return userRepository.addUser(
+        name,
+        email,
+        address,
+        password,
+    )
 }
 
 export const removeUser = async (id: number) => {

@@ -2,10 +2,18 @@ import prismaClient from '../db/prismaClient';
 import { User } from '../entities/userEntity'
 const prisma = prismaClient.prisma;
 
-export const addUser = (name: string) => {
+export const addUser = (
+    name: string,
+    email: string,
+    address: string,
+    password: string,
+) => {
     return prisma.user.create({
         data: {
             name,
+            email,
+            address,
+            password,
             point: 100,
         },
     });
