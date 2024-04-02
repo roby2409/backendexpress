@@ -13,7 +13,10 @@
   "dependencies": {
     "@prisma/client": "^5.11.0",
     "@types/http-errors": "^2.0.4",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "jsonwebtoken": "^9.0.1",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
@@ -21,6 +24,8 @@
     "nodemon": "^3.1.0",
     "prisma": "^5.11.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.3"
+    "typescript": "^5.4.3",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/bcrypt": "^5.0.0"
   }
 }
