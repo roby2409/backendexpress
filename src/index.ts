@@ -2,9 +2,6 @@
 import express, { Request, Response } from "express";
 import createError from "http-errors"
 import userRoutes from './routes/userRoutes';
-import { PrismaClient } from "@prisma/client";
-
-const prisma = new PrismaClient()
 
 const app = express()
 
