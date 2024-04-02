@@ -2,10 +2,12 @@
 import express, { Request, Response } from "express";
 import createError from "http-errors"
 import userRoutes from './routes/userRoutes';
+import { login } from '../src/controllers/authController';
 
 const app = express()
 
 app.use(express.json());
+app.use('/login', login);
 app.use(userRoutes);
 
 
