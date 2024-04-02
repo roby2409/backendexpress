@@ -1,5 +1,6 @@
 import prismaClient from '../db/prismaClient';
 import { User } from '../entities/userEntity'
+import bcrypt from 'bcrypt';
 const prisma = prismaClient.prisma;
 
 export const addUser = (
@@ -26,12 +27,21 @@ export const findUserById = (id: number): Promise<User | null> => {
 };
 
 
-export const updateUser = (id: number, data: Record<string, any>) => {
+export const updateUser = async (id: number, data: Record<string, any>) => {
+    const { password, ...restData } = data;
+    const updateData: Record<string, any> = { ...restData };
+
+    if (password) {
+        const hashedPassword = await bcrypt.hash(password, 10);
+        updateData.password = hashedPassword;
+    }
+
     return prisma.user.update({
-        where: { id: id },
-        data: { ...data },
+        where: { id },
+        data: updateData,
     });
 };
+
 
 export const allUsers = () => {
     return prisma.user.findMany();
