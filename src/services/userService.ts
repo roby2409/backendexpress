@@ -15,6 +15,11 @@ export const getUserById = async (id: number) => {
     return user
 }
 
+export const getUserByEmail = async (email: string) => {
+    const user = await userRepository.findUserByEmail(email)
+    return user
+}
+
 export const getUserPoints = async (id: number): Promise<Number | undefined> => {
     const user = await userRepository.findUserById(id)
     return user?.point;

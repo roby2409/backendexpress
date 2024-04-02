@@ -26,6 +26,14 @@ export const findUserById = (id: number): Promise<User | null> => {
     });
 };
 
+export const findUserByEmail = (email: string): Promise<User | null> => {
+    return prisma.user.findUnique({
+        where: {
+            email: email
+        }
+    });
+};
+
 
 export const updateUser = async (id: number, data: Record<string, any>) => {
     const { password, ...restData } = data;
