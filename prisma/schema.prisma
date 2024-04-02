@@ -13,26 +13,30 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id     Int     @id @default(autoincrement())
-  name   String
-  point Int     @default(100)
-  orders Order[]
+  id        Int      @id @default(autoincrement())
+  name      String
+  point     Int      @default(100)
+  email     String?  @unique(map: "email") @db.VarChar(255)
+  address   String?  @db.VarChar(255)
+  password  String?  @db.VarChar(255)
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+  updatedAt DateTime @default(now()) @db.Timestamp(0)
+  orders    Order[]
 }
 
 model Order {
-  id     Int   @id @default(autoincrement())
+  id     Int  @id @default(autoincrement())
   userId Int
   bookId Int
-  user   User  @relation(fields: [userId], references: [id])
+  user   User @relation(fields: [userId], references: [id])
 }
 
 model Book {
-  id          Int      @id @default(autoincrement())
-  title       String
-  writer      String
-  coverImage  String   @default("https://images-na.ssl-images-amazon.com/images/I/51Ga5GuElyL._AC_SX184_.jpg")
-  point       Int
-  tags        String[]
+  id         Int      @id @default(autoincrement())
+  title      String
+  writer     String
+  coverImage String   @default("https://images-na.ssl-images-amazon.com/images/I/51Ga5GuElyL._AC_SX184_.jpg")
+  point      Int
+  tags       String[]
 }
