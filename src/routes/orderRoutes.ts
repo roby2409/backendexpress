@@ -5,8 +5,7 @@ import { accessValidation } from '../services/authService';
 const router = express.Router();
 
 router.get('/list-of-buy', accessValidation, orderController.listOfBuy);
-router.post('/order', orderController.createOrder);
-router.get('/order/:userId', orderController.listOrdersByUserId);
+router.post('/order', accessValidation, orderController.createOrder);
 router.delete('/order/:orderId', orderController.cancelOrder);
 
 export default router;
