@@ -25,7 +25,9 @@ export const createOrder = async (req: Request, res: Response) => {
 
     if (userPoints >= bookPoints) {
         // Deduct points from user and create order
-        const resultDeductsPoints = await userService.deductPoints(userId, bookPoints);
+        const user = await userService.getUserById(userId)
+        const userPoint = user?.point ?? 0
+        const resultDeductsPoints = await userService.updatePoints(userId, userPoint - bookPoints);
         await orderService.createOrder(userId, bookId);
         res.status(201).json(resultDeductsPoints);
     } else {
@@ -34,8 +36,16 @@ export const createOrder = async (req: Request, res: Response) => {
 }
 
 export const cancelOrder = async (req: Request, res: Response) => {
-    const orderId = parseFloat(req.params.orderId);
-    const success = await orderService.cancelOrder(orderId);
-    res.status(201).json(success);
+    try {
+        const userId = (req as ValidationRequest).userData.id;
+        const userPoints = await userService.getUserPoints(Number(userId));
+        const orderId = parseFloat(req.params.orderId);
+        const detailOrder = await orderService.cancelOrder(orderId);
+        const bookPoints = await bookService.getBookPoints(detailOrder.bookId);
+        const userStateAfterUpdatePoints = await userService.updatePoints(userId, userPoints + bookPoints);
+        res.status(201).json(userStateAfterUpdatePoints);
+    } catch (error) {
+        res.status(500).json({ message: `Failed to cancel order` });
+    }
 };
 
