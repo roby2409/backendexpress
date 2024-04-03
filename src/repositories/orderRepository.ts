@@ -10,11 +10,16 @@ export const addOrder = (userId: number, bookId: number) => {
     });
 };
 
-export const getOrdersByUserId = (userId: number) => {
+export const getOrdersByUserId = (userId: number, page: number, perPage: number) => {
+    const skip = (page - 1) * perPage;
     return prisma.order.findMany({
         where: { userId },
+        include: { book: true },
+        skip,
+        take: perPage
     });
 };
+
 
 export const cancelOrder = (orderId: number) => {
     return prisma.order.delete({

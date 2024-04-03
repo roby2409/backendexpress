@@ -19,7 +19,7 @@ export const updateUser = async (req: Request, res: Response) => {
         res.json(updatedPost);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Failed to update user' });
+        res.status(500).json({ message: 'Failed to update user' });
     }
 };
 
@@ -30,7 +30,7 @@ export const addNewUser = async (req: Request, res: Response) => {
         res.json(result);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Failed to create user' });
+        res.status(500).json({ message: 'Failed to create user' });
     }
 }
 
@@ -39,10 +39,10 @@ export const deleteUser = async (req: Request, res: Response) => {
     const { id } = req.params
     try {
         const result = await removeUser(Number(id));
-        res.json({ success: `success delete user ${result.name}` });
+        res.json({ message: `success delete user ${result.name}` });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Failed to delete user' });
+        res.status(500).json({ message: 'Failed to delete user' });
     }
 
 }

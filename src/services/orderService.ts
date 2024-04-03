@@ -8,8 +8,8 @@ export const createOrder = (userId: number, bookId: number) => {
     return orderRepository.addOrder(userId, bookId);
 };
 
-export const listOrdersByUserId = (userId: number) => {
-    return orderRepository.getOrdersByUserId(userId);
+export const listOrdersByUserId = (userId: number, page: number, perPage: number) => {
+    return orderRepository.getOrdersByUserId(userId, page, perPage);
 };
 
 export const cancelOrder = (orderId: number) => {

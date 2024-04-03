@@ -1,18 +1,16 @@
 import { NextFunction, Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { User } from '../entities/userEntity';
-interface ValidationRequest extends Request {
+export interface ValidationRequest extends Request {
     userData: User
 }
-
-
 export const accessValidation = (req: Request, res: Response, next: NextFunction) => {
     const validationReq = req as ValidationRequest
     const { authorization } = validationReq.headers;
 
     if (!authorization) {
         return res.status(401).json({
-            message: 'need a token access'
+            message: 'Token session is invalid'
         })
     }
 

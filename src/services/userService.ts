@@ -25,10 +25,9 @@ export const getUserPoints = async (id: number): Promise<number> => {
     return user?.point ?? 0;
 }
 
-export const deductPoints = async (userId: number, pointsToDeduct: number) => {
+export const updatePoints = async (userId: number, pointToUpdate: number) => {
     const user = await userRepository.findUserById(userId)
-    const userPoint = user?.point ?? 0
-    const updatedUser = { ...user, points: userPoint - pointsToDeduct };
+    const updatedUser = { ...user, points: pointToUpdate };
     return userRepository.updatePoints(userId, updatedUser.points);
 }
 

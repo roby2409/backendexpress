@@ -26,10 +26,13 @@ model User {
 }
 
 model Order {
-  id     Int  @id @default(autoincrement())
-  userId Int
-  bookId Int
-  user   User @relation(fields: [userId], references: [id])
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  bookId    Int
+  createdAt DateTime @default(now()) @db.Timestamp(0)
+  updatedAt DateTime @default(now()) @db.Timestamp(0)
+  user      User     @relation(fields: [userId], references: [id])
+  book      Book     @relation(fields: [bookId], references: [id])
 }
 
 model Book {
@@ -39,4 +42,7 @@ model Book {
   coverImage String   @default("https://images-na.ssl-images-amazon.com/images/I/51Ga5GuElyL._AC_SX184_.jpg")
   point      Int
   tags       String[]
+  createdAt  DateTime @default(now()) @db.Timestamp(0)
+  updatedAt  DateTime @default(now()) @db.Timestamp(0)
+  orders     Order[]
 }
