@@ -6,6 +6,6 @@ const router = express.Router();
 
 router.get('/list-of-buy', accessValidation, orderController.listOfBuy);
 router.post('/order', accessValidation, orderController.createOrder);
-router.delete('/order/:orderId', orderController.cancelOrder);
+router.delete('/order/:orderId', accessValidation, orderController.cancelOrder);
 
 export default router;
