@@ -2,6 +2,7 @@
 import express, { Request, Response } from "express";
 import createError from "http-errors"
 import userRoutes from './routes/userRoutes';
+import bookRoutes from './routes/bookRoutes';
 import { login } from '../src/controllers/authController';
 
 const app = express()
@@ -9,6 +10,7 @@ const app = express()
 app.use(express.json());
 app.use('/login', login);
 app.use(userRoutes);
+app.use(bookRoutes);
 
 
 // handle 404 error
