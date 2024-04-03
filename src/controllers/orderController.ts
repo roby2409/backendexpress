@@ -6,7 +6,10 @@ import { ValidationRequest } from '../services/authService';
 
 export const listOfBuy = async (req: Request, res: Response) => {
     const userId = (req as ValidationRequest).userData.id;
-    const orders = await orderService.listOrdersByUserId(userId);
+    const page = parseInt(req.query.page as string) || 1;
+    const perPage = parseInt(req.query.perPage as string) || 10;
+
+    const orders = await orderService.listOrdersByUserId(userId, page, perPage);
     res.status(200).json(orders);
 }
 
@@ -29,12 +32,6 @@ export const createOrder = async (req: Request, res: Response) => {
         res.status(400).json({ message: 'Not enough points to buy the book' });
     }
 }
-
-export const listOrdersByUserId = async (req: Request, res: Response) => {
-    const userId = parseInt(req.params.userId);
-    const orders = await orderService.listOrdersByUserId(userId);
-    res.json(orders);
-};
 
 export const cancelOrder = async (req: Request, res: Response) => {
     const orderId = parseFloat(req.params.orderId);
