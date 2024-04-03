@@ -13,6 +13,6 @@ export const addNewBook = async (req: Request, res: Response) => {
         res.json(result);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Failed to create user' });
+        res.status(500).json({ message: 'Failed to create user' });
     }
 }

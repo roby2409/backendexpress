@@ -10,7 +10,7 @@ export const accessValidation = (req: Request, res: Response, next: NextFunction
 
     if (!authorization) {
         return res.status(401).json({
-            message: 'need a token access'
+            message: 'Token session is invalid'
         })
     }
 
