@@ -14,7 +14,7 @@ export const createNewBook = async (
 }
 
 
-export const getBookPoints = async (id: number): Promise<Number> => {
+export const getBookPoints = async (id: number): Promise<number> => {
     const book = await getBookById(id)
     return book?.point ?? 0;
 }
