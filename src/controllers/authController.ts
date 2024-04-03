@@ -9,14 +9,18 @@ export const login = async (req: Request, res: Response) => {
     const user = await getUserByEmail(email);
 
     if (!user) {
-        return res.status(404).json({
-            message: 'User not found'
+        return res.status(422).json({
+            email: [
+                'email not found'
+            ]
         })
     }
 
     if (!user.password) {
-        return res.status(404).json({
-            message: 'Password not set'
+        return res.status(422).json({
+            password: [
+                'Password not set'
+            ]
         })
     }
 
@@ -38,12 +42,14 @@ export const login = async (req: Request, res: Response) => {
 
 
         return res.json({
-            data: user,
+            user: user,
             token: token
         })
     } else {
-        return res.status(403).json({
-            message: 'Wrong password'
+        return res.status(422).json({
+            password: [
+                'You have wrong password'
+            ]
         })
     }
 };
