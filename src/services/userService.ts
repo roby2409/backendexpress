@@ -20,9 +20,16 @@ export const getUserByEmail = async (email: string) => {
     return user
 }
 
-export const getUserPoints = async (id: number): Promise<Number | undefined> => {
+export const getUserPoints = async (id: number): Promise<number> => {
     const user = await userRepository.findUserById(id)
-    return user?.point;
+    return user?.point ?? 0;
+}
+
+export const deductPoints = async (userId: number, pointsToDeduct: number) => {
+    const user = await userRepository.findUserById(userId)
+    const userPoint = user?.point ?? 0
+    const updatedUser = { ...user, points: userPoint - pointsToDeduct };
+    return userRepository.updatePoints(userId, updatedUser.points);
 }
 
 export const createNewUser = async (

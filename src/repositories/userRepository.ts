@@ -60,3 +60,18 @@ export const deleteUser = (userId: number) => {
         where: { id: userId },
     });
 };
+
+export const updatePoints = async (id: number, newPoints: number): Promise<User | null> => {
+    try {
+        const updatedUser = await prisma.user.update({
+            where: { id },
+            data: {
+                point: newPoints,
+            },
+        });
+        return updatedUser;
+    } catch (error) {
+        console.error('Error updating user points:', error);
+        return null;
+    }
+};
