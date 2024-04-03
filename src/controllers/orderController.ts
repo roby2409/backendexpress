@@ -2,9 +2,11 @@ import { Request, Response } from 'express';
 import * as orderService from '../services/orderService';
 import * as bookService from '../services/bookService';
 import * as userService from '../services/userService';
+import { ValidationRequest } from '../services/authService';
 
 export const listOfBuy = async (req: Request, res: Response) => {
-    const orders = await orderService.listOrders();
+    const userId = (req as ValidationRequest).userData.id;
+    const orders = await orderService.listOrdersByUserId(userId);
     res.status(200).json(orders);
 }
 
@@ -26,8 +28,6 @@ export const createOrder = async (req: Request, res: Response) => {
     } else {
         res.status(400).json({ message: 'Not enough points to buy the book' });
     }
-
-    // res.json({ "userpoint": userPoints, "bookPoints": bookPoints });
 }
 
 export const listOrdersByUserId = async (req: Request, res: Response) => {

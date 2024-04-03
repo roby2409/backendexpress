@@ -13,6 +13,7 @@ export const addOrder = (userId: number, bookId: number) => {
 export const getOrdersByUserId = (userId: number) => {
     return prisma.order.findMany({
         where: { userId },
+        include: { book: true }
     });
 };
 
