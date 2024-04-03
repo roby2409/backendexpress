@@ -7,13 +7,14 @@ export const listBooks = () => {
 export const createNewBook = async (
     title: string,
     writer: string,
-    tags: string[]
+    tags: string[],
+    point?: number,
 ) => {
-    return addBook(title, writer, tags)
+    return addBook(title, writer, tags, point)
 }
 
 
-export const getBookPoints = async (id: number): Promise<Number | undefined> => {
-    const user = await getBookById(id)
-    return user?.point;
+export const getBookPoints = async (id: number): Promise<Number> => {
+    const book = await getBookById(id)
+    return book?.point ?? 0;
 }

@@ -7,9 +7,9 @@ export const listOfBooks = async (req: Request, res: Response) => {
 }
 
 export const addNewBook = async (req: Request, res: Response) => {
-    const { title, writer, tags } = req.body;
+    const { title, writer, tags, point } = req.body;
     try {
-        const result = await createNewBook(title, writer, tags);
+        const result = await createNewBook(title, writer, tags, point);
         res.json(result);
     } catch (error) {
         console.error(error);

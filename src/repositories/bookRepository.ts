@@ -7,14 +7,16 @@ export const addBook = (
     title: string,
     writer: string,
     tags: string[],
+    point?: number
 ) => {
+    const randomPoint = point ?? Math.floor(Math.random() * (200 - 20 + 1)) + 20;
     return prisma.book.create({
         data: {
             title,
             writer,
             coverImage: "https://images-na.ssl-images-amazon.com/images/I/51Ga5GuElyL._AC_SX184_.jpg",
             tags,
-            point: 100
+            point: randomPoint
         },
     });
 };
