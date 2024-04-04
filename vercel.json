@@ -1,0 +1,20 @@
+{
+    "version": 2,
+    "builds": [
+        {
+            "src": "src/**/*",
+            "use": "@vercel/node"
+        }
+    ],
+    "env": {
+        "DATABASE_URL": "postgres://default:I1P3bUGlsqAk@ep-aged-lab-a1bhu7fm.ap-southeast-1.aws.neon.tech:5432/verceldb?sslmode=require"
+    },
+    "build": {
+        "env": {
+            "DATABASE_URL": "postgres://default:I1P3bUGlsqAk@ep-aged-lab-a1bhu7fm.ap-southeast-1.aws.neon.tech:5432/verceldb?sslmode=require"
+        },
+        "commands": {
+            "build": "prisma generate && npm run build"
+        }
+    }
+}

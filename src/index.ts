@@ -12,6 +12,7 @@ const app = express()
 app.use(cors());
 
 app.use(express.json());
+app.get("/", (req, res) => res.send("Welcome bro"));
 app.use('/login', login);
 app.use(userRoutes);
 app.use(orderRoutes);
@@ -23,6 +24,6 @@ app.use((req: Request, res: Response, next: Function) => {
     next(createError(404))
 })
 
-app.listen(3000, () =>
-    console.log(`⚡️[server]: Server is running at http://localhost:3000`)
+app.listen(process.env.PORT, () =>
+    console.log(`⚡️[server]: Server is running at http://localhost:${process.env.PORT}`)
 )
